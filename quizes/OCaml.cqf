@@ -1,0 +1,5 @@
+Co oznacza skrót "OCaml"?;Objective Caml;Open Compiler and Language;Online Compilation and Management Language
+Który z poniższych typów danych nie występuje w OCaml?;Long;Int;Float
+Jak nazywa się operator do sprawdzania równości w OCaml?;=;==;===
+Która z poniższych struktur danych jest wbudowana w OCaml?;List;Stack;Tree
+Który mechanizm w OCaml jest używany do obsługi wyjątków?;try...with;if...else;switch...case

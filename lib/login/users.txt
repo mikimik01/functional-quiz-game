@@ -1,0 +1,3 @@
+new_user;new_password
+miki;miki
+qwer;qwer
