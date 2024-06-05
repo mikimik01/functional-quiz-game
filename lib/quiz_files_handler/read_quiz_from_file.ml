@@ -54,6 +54,17 @@ let findi p lst =
     | x :: xs -> if p x then (i, x) else aux (i + 1) xs
   in aux 0 lst
 
+(* Funkcja pomocnicza do sprawdzania, czy podciąg znajduje się w stringu *)
+let string_contains str substr =
+  let len = String.length str in
+  let sub_len = String.length substr in
+  let rec aux i =
+    if i + sub_len > len then false
+    else if String.sub str i sub_len = substr then true
+    else aux (i + 1)
+  in
+  aux 0
+
 (* Funkcja do dodawania użytkownika do pliku winners.txt *)
 let add_winner quiz_name user =
   let filename = "lib/winners.txt" in
@@ -70,11 +81,17 @@ let add_winner quiz_name user =
     | None -> [] in
   let oc = open_out filename in
   let quiz_found = ref false in
+  let user_found = ref false in
   List.iter (fun line ->
     if String.starts_with ~prefix:quiz_name line then
       begin
         quiz_found := true;
-        Printf.fprintf oc "%s, %s\n" line user
+        if string_contains line user then
+          user_found := true;
+        if not !user_found then
+          Printf.fprintf oc "%s, %s\n" line user
+        else
+          Printf.fprintf oc "%s\n" line
       end
     else
       Printf.fprintf oc "%s\n" line
@@ -82,6 +99,7 @@ let add_winner quiz_name user =
   if not !quiz_found then
     Printf.fprintf oc "%s: %s\n" quiz_name user;
   close_out oc
+
 
 (* Funkcja do uruchomienia quizu z pomieszanymi pytaniami i odpowiedziami *)
 let start_quiz quiz_name user questions =

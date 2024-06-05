@@ -71,10 +71,11 @@ let rec main_menu () =
         Random.self_init ();
         let name = (List.nth quiz_list (!quiz_number - 1)) in
         let len = String.length name in
-        let cut_name = String.sub name 0 (len - 3) in
+        let cut_name = String.sub name 0 (len - 4) in
         QuizLib.QuizFilesReader.start_quiz cut_name !loginRef quiz_questions;
         print_endline "\nNaciśnij dowolny klawisz, aby kontynuować...";
         ignore (read_line ());
+        quiz_number := -1;
         main_menu ()
     | Some 2 -> 
         ignore (Sys.command "clear");
